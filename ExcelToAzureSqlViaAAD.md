@@ -13,34 +13,40 @@
 # Images
 
 <a name="aad-not-configured" />
-![Not Configured](./images/NoAADConfigured.jpg)
+
+![Not Configured](./images/NoAADConfigured.jpg?raw=true)
 Azure AD _not_ configured
 
 <a name="ip-not-configured" />
-![Not Configured](./images/NoIPConfigured.jpg)
+
+![Not Configured](./images/NoIPConfigured.jpg?raw=true)
 IP _not_ configured
 
 <a name="ssms-sql-auth" />
-![Not Configured](./images/SsmsSqlAuth.jpg)
+
+![Not Configured](./images/SsmsSqlAuth.jpg?raw=true)
 Sql Auth to Azure SQL in [SSMS][ssms]
 
 <a name="ssms-aad-auth" />
-![Not Configured](./images/SsmsAadAuth.jpg)
+
+![Not Configured](./images/SsmsAadAuth.jpg?raw=true)
 AAD Auth to Azure SQL in [SSMS][ssms]
 
 <a name="excel-connection" />
-![Not Configured](./images/ExcelConnection1.jpg)
-![Not Configured](./images/ExcelConnection2.jpg)
+
+![Not Configured](./images/ExcelConnection1.jpg?raw=true)
+![Not Configured](./images/ExcelConnection2.jpg?raw=true)
 Connection path to the right screen.
 
 <a name="excel-sql-auth" />
-![Not Configured](./images/ExcelSqlAuth.jpg)
+
+![Not Configured](./images/ExcelSqlAuth.jpg?raw=true)
 Sql Auth to Azure SQL in [Excel][excel]
 
 <a name="excel-aad-auth" />
-![Not Configured](./images/ExcelAadAuth.jpg)
-AAD Auth to Azure SQL in [Excel][excel]
 
+![Not Configured](./images/ExcelAadAuth.jpg?raw=true)
+AAD Auth to Azure SQL in [Excel][excel]
 
 [ssms]: https://docs.microsoft.com/en-us/sql/ssms/sql-server-management-studio-changelog-ssms?view=sql-server-2017
 [excel]: https://products.office.com/en-us/compare-all-microsoft-office-products-b
