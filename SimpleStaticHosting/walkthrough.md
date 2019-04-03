@@ -30,27 +30,43 @@ Walkthrough to understand how to get simple hosting up and running cheeply.
 ## Images
 
 <a name="azure-storage" />
+Azure Storage
+
 ![Azure Storage](azure-storage.jpg?raw=true)
 
 <a name="azure-storage-config" />
+Azure Storage Configuration
+
 ![Azure Storage Configuration](azure-storage-config.jpg?raw=true)
 
 <a name="azure-storage-domain" />
+Setup Custom Domain
+
 ![Setup Custom Domain](azure-storage-domain.jpg?raw=true)
 
 <a name="azure-storage-site" />
+Static Hosting
+
 ![Static Hosting](azure-storage-site.jpg?raw=true)
 
 <a name="azure-storage-files" />
+Upload Files
+
 ![Upload Files](azure-storage-files.jpg?raw=true)
 
 <a name="godaddy-home" />
+GoDaddy Home
+
 ![GoDaddy Home](godaddy-home.jpg?raw=true)
 
 <a name="godaddy-dns-cnames" />
+CNAME config
+
 ![CNAME config](godaddy-dns-cnames.jpg?raw=true)
 
 <a name="godaddy-dns-forward" />
+Forwarding
+
 ![Forwarding](godaddy-dns-forward.jpg?raw=true)
 
 [azure]: https://portal.azure.com
