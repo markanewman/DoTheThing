@@ -1,0 +1,123 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": { "config": { "type": "secureObject" } },
+    "variables": {
+		"dataDiskName": "[concat(parameters('config').vmName, 'datadisk')]",
+		"networkInterfaceName" : "[concat(parameters('config').vmName, 'nic')]",
+        "networkSecurityGroupId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",		
+		"networkSecurityGroupName": "[concat(parameters('config').vmName, 'nsg')]",
+		"osDiskName": "[concat(parameters('config').vmName, 'osdisk')]",
+		"publicIpAddressName" : "[concat(parameters('config').vmName, 'ip')]",
+		"virtualMachineSize": "Standard_E4_v3",
+        "virtualNetworkId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
+		"virtualNetworkName": "[concat(parameters('config').vmName, 'vnet')]",
+        "subnetRef": "[concat(variables('virtualNetworkId'), '/subnets/default')]"
+    },
+    "resources": [
+		{
+            "name": "[variables('networkInterfaceName')]",
+            "type": "Microsoft.Network/networkInterfaces",
+            "apiVersion": "2018-10-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]",
+                "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]",
+                "[concat('Microsoft.Network/publicIpAddresses/', variables('publicIpAddressName'))]"
+            ],
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "subnet": { "id": "[variables('subnetRef')]" },
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIpAddress": { "id": "[resourceId(resourceGroup().name, 'Microsoft.Network/publicIpAddresses', variables('publicIpAddressName'))]" }
+                        }
+                    }
+                ],
+                "networkSecurityGroup": { "id": "[variables('networkSecurityGroupId')]" }
+            }
+        },
+        {
+            "name": "[variables('networkSecurityGroupName')]",
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2019-02-01",
+            "location": "[resourceGroup().location]"
+        },
+        {
+            "name": "[variables('virtualNetworkName')]",
+            "type": "Microsoft.Network/virtualNetworks",
+            "apiVersion": "2019-04-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "addressSpace": { "addressPrefixes": [ "10.0.1.0/24" ] },
+                "subnets": [{
+                    "name": "default",
+                    "properties": { "addressPrefix": "10.0.1.0/24" }
+                }]
+            }
+        },
+        {
+            "name": "[variables('publicIpAddressName')]",
+            "type": "Microsoft.Network/publicIpAddresses",
+            "apiVersion": "2019-02-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+				"publicIpAllocationMethod": "Dynamic",
+				"idleTimeoutInMinutes": 5,
+                "dnsSettings": {
+                    "domainNameLabel": "[parameters('config').vmName]",
+                    "fqdn": "[concat(parameters('config').vmName, '.', resourceGroup().location, '.cloudapp.azure.com')]"
+                }
+			},
+            "sku": { "name": "Basic" }
+        },
+        {
+            "name": "[parameters('config').vmName]",
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2019-03-01",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [ "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]" ],
+            "properties": {
+                "hardwareProfile": { "vmSize": "[variables('virtualMachineSize')]" },
+                "storageProfile": {
+                    "osDisk": {
+						"name": "[variables('osDiskName')]",
+                        "createOption": "fromImage",
+                        "managedDisk": { "storageAccountType": "StandardSSD_LRS" }
+                    },
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsDesktop",
+                        "offer": "Windows-10",
+                        "sku": "rs5-pro",
+                        "version": "latest"
+                    }
+                },
+                "networkProfile": { "networkInterfaces": [ { "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]" } ] },
+                "osProfile": {
+                    "computerName": "[parameters('config').vmName]",
+                    "adminUsername": "[parameters('config').userName]",
+                    "adminPassword": "[parameters('config').password]",
+                    "windowsConfiguration": {
+                        "enableAutomaticUpdates": true,
+                        "provisionVmAgent": true
+                    }
+                },
+                "licenseType": "Windows_Client"
+            }
+        },
+		{
+            "name": "[variables('dataDiskName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-04-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "accessTier": "Hot",
+                "supportsHttpsTrafficOnly": true
+            },
+            "sku": { "name": "Standard_LRS" },
+            "kind": "StorageV2"
+        }
+	]
+}
