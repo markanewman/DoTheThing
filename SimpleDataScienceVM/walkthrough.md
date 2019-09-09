@@ -44,7 +44,8 @@ New-AzureRMResourceGroupDeployment -verbose -ResourceGroupName $resourceGroupNam
    * [VS Code](https://code.visualstudio.com/Download) along with the below plugins
      * Python by Microsoft.
 	   Set the option Python >> Data Science: Send Selection To Interactive Window
-   * [R Studio](https://www.rstudio.com/products/rstudio/download/)	   
+   * [R Studio](https://www.rstudio.com/products/rstudio/download/)
+   * [RTools](https://cran.r-project.org/bin/windows/Rtools/)
    
    ```{ps1}
    if('Unrestricted' -ne (Get-ExecutionPolicy)) { Set-ExecutionPolicy Bypass -Scope Process -Force }
@@ -64,6 +65,7 @@ New-AzureRMResourceGroupDeployment -verbose -ResourceGroupName $resourceGroupNam
 
    code --install-extension ms-python.python
    choco install r.studio -y
+   choco install rtools -y
    ```
 6. On the data disk, make a file share called "shared".
    Resource group >> storage account >> Files (left hand side) >> Add
