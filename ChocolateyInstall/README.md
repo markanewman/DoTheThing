@@ -34,7 +34,7 @@ choco install rdcman -y
 * Utils
 
 ```{ps1}
-choco install adobereade
+choco install adobereader -y
 choco install 7zip.install -y
 choco install notepadplusplus.install -y
 choco install winmerge -y
