@@ -36,7 +36,6 @@ New-AzureRMResourceGroupDeployment -verbose -ResourceGroupName $resourceGroupNam
    * [Python](https://www.python.org/downloads/windows/)
    * [R](https://cran.r-project.org/bin/windows/base/)
    * [Git](https://gitforwindows.org/)
-   * [GitHub Desktop](https://desktop.github.com/)
    * [Notepad++](https://notepad-plus-plus.org/download)
    * [7-zip](https://www.7-zip.org/)
    * [FileZilla](https://filezilla-project.org/download.php)
@@ -47,6 +46,7 @@ New-AzureRMResourceGroupDeployment -verbose -ResourceGroupName $resourceGroupNam
    * [R Studio](https://www.rstudio.com/products/rstudio/download/)
    * [RTools](https://cran.r-project.org/bin/windows/Rtools/)
    * [Pandoc](https://pandoc.org)
+   * [SSMS](https://docs.microsoft.com/en-us/sql/ssms/sql-server-management-studio-ssms)
    
    ```{ps1}
    if('Unrestricted' -ne (Get-ExecutionPolicy)) { Set-ExecutionPolicy Bypass -Scope Process -Force }
@@ -56,7 +56,6 @@ New-AzureRMResourceGroupDeployment -verbose -ResourceGroupName $resourceGroupNam
    choco install python3  -y
    choco install r.project -y
    choco install git.install -y
-   choco install github-desktop -y   
    choco install notepadplusplus.install -y
    choco install 7zip.install -y
    choco install filezilla -y
@@ -68,6 +67,8 @@ New-AzureRMResourceGroupDeployment -verbose -ResourceGroupName $resourceGroupNam
    choco install r.studio -y
    choco install rtools -y
    choco install pandoc -y
+
+   choco install ssms -y
    ```
 6. On the data disk, make a file share called "shared".
    Resource group >> storage account >> Files (left hand side) >> Add
