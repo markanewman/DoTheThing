@@ -34,7 +34,7 @@ choco install rdcman -y
 * Utils
 
 ```{ps1}
-choco install adobereader -y
+choco install adobereade
 choco install 7zip.install -y
 choco install notepadplusplus.install -y
 choco install winmerge -y
@@ -46,7 +46,7 @@ choco install postman -y
 ```{ps1}
 choco install r.studio -y
 choco install pandoc -y
-choco install ssms -y
+choco install sql-server-management-studio -y
 choco install vscode -y
 refreshenv
 code --install-extension ms-python.python
