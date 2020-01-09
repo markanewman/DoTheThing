@@ -41,16 +41,18 @@ This walkthrough is intended to allow [Azure Key Vault](https://docs.microsoft.c
    Login-AzureRmAccount
    Set-AzureRmContext -SubscriptionName "{{subscription name}}"
    
-   New-AzureRMResourceGroupDeployment `	
+   New-AzureRMResourceGroupDeployment `
 	-Name 'Link_SSL_From_KV' `
 	-Mode 'Incremental' `
 	-TemplateFile './template.json' `
 	-keyVaultResourceGroupName '{{key vault resource group name}}' `
 	-keyVaultName '{{key vault name}}' `
-	-certName '{{cert name}}' `	
+	-keyVaultSecretName '{{cert name}}' `
 	-ResourceGroupName '{{app service resource group name}}' `
+	-appServiceName '{{app service name}}`
 	-appServicePlanName '{{app service plan name}}' `
-	-verbose
+	-hostName '{{host name}}' `
+	-verbose	
    ```
 3. Make sure [thumbprints match](#thumbprints-match) between key vault and app services and web site
 
