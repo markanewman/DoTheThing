@@ -24,7 +24,7 @@ This walkthrough is intended to allow [Azure Key Vault](https://docs.microsoft.c
 	  * The first time you select this option, you will need to [configure the CA](#configure-ca).	    
 	* The "DNS Names" field is used to add in Subject Alternitive Names (SANs).
 	  This allows you to have a single certificate for multipule related sites i.e. www + api.
-	  This is a feature not available in the [basic walkthrough][basicwalkthrough] above.
+	  This is a feature not available in the basic walkthrough above.
 	* Make sure you are on one of the "Automatically renew" options.
 	* [Organization validation](https://en.wikipedia.org/wiki/Public_key_certificate#Organization_validation) and [Extended validation](https://en.wikipedia.org/wiki/Extended_Validation_Certificate) certs are available in the "Advanced Configuration" selector
 2. Run the ARM template to link key vault to the app service
@@ -35,7 +35,8 @@ This walkthrough is intended to allow [Azure Key Vault](https://docs.microsoft.c
 	 * The key vault name
 	 * The certficate name
 	 * The [resource group name](#app-service-names) for the app service
-	 * The service plan name.	 
+	 * The service plan name.
+   * Run the PowerShell script
    ```{ps1}
    Login-AzureRmAccount
    Set-AzureRmContext -SubscriptionName "{{subscription name}}"
