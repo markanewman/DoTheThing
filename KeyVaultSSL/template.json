@@ -4,19 +4,32 @@
 	"parameters": {
 		"keyVaultResourceGroupName": { "type": "string" },
 		"keyVaultName": { "type": "string" },
-		"certName": { "type": "string" },
-		"appServicePlanName": { "type": "string" }
+		"keyVaultSecretName": { "type": "string" },
+		"appServiceName": { "type": "string" },
+		"appServicePlanName": { "type": "string" },
+		"hostName": { "type": "string" }
 	},
 	"resources": [{
 			"apiVersion": "2015-08-01",
 			"location": "[resourceGroup().location]",
-			"name": "[parameters('certName')]",
+			"name": "[parameters('keyVaultSecretName')]",
 			"type": "Microsoft.Web/certificates",
 			"properties": {
 				"keyVaultId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('keyVaultResourceGroupName'), '/providers/Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]",
-				"keyVaultSecretName": "[parameters('certName')]",
-				"serverFarmId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().location, '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
+				"keyVaultSecretName": "[parameters('keyVaultSecretName')]",
+				"serverFarmId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
 			}
-		}
+		},
+		{
+            "type":"Microsoft.Web/sites/hostnameBindings",
+            "name":"[concat(parameters('appServiceName'), '/', parameters('hostName'))]",
+            "dependsOn": [ "[concat('Microsoft.Web/certificates/', parameters('keyVaultSecretName'))]" ],
+            "apiVersion":"2016-03-01",
+            "location":"[resourceGroup().location]",
+            "properties":{
+                "sslState":"SniEnabled",
+                "thumbprint":"[reference(resourceId('Microsoft.Web/certificates', parameters('keyVaultSecretName'))).Thumbprint]"
+            }
+        }
 	]
 }
