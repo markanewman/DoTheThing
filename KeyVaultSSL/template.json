@@ -1,0 +1,22 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"keyVaultResourceGroupName": { "type": "string" },
+		"keyVaultName": { "type": "string" },
+		"certName": { "type": "string" },
+		"appServicePlanName": { "type": "string" }
+	},
+	"resources": [{
+			"apiVersion": "2015-08-01",
+			"location": "[resourceGroup().location]",
+			"name": "[parameters('certName')]",
+			"type": "Microsoft.Web/certificates",
+			"properties": {
+				"keyVaultId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('keyVaultResourceGroupName'), '/providers/Microsoft.KeyVault/vaults/', parameters('keyVaultName'))]",
+				"keyVaultSecretName": "[parameters('certName')]",
+				"serverFarmId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().location, '/providers/Microsoft.Web/serverfarms/', parameters('appServicePlanName'))]"
+			}
+		}
+	]
+}
