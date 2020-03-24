@@ -21,3 +21,10 @@ $files = Get-ChildItem -Path $path -File
 $i = 0
 $files | ForEach-Object { Move-Item "$path/$_" "$path.$((++$i % $splitCount) + 1)" }
 ```
+4. Validate results
+```{ps1}
+(Get-ChildItem -Path $path -File | Measure-Object).Count
+$i = 0
+1..$splitCount | ForEach-Object { $i = $i + (Get-ChildItem -Path "$path.$_" -File | Measure-Object).Count }
+$i
+```
