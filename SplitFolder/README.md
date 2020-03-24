@@ -20,6 +20,7 @@ $files = Get-ChildItem -Path $path -File
 1..$splitCount | ForEach-Object { New-Item -ItemType Directory -Path "$path.$_" }
 $i = 0
 $files | ForEach-Object { Move-Item "$path/$_" "$path.$((++$i % $splitCount) + 1)" }
+Remove-Variable -Name 'files'
 ```
 4. Validate results
 ```{ps1}
