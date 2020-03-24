@@ -15,7 +15,7 @@ This splits a single folder into several versions of the folder with the files b
 $path = 'd:/xxx/yyy'
 $load = 6
 
-1..$load | ForEach-Object {	New-Item -ItemType Directory -Path "$path.$_" }
+1..$load | ForEach-Object { New-Item -ItemType Directory -Path "$path.$_" }
 $files = Get-ChildItem -Path $path -File
 $i = 0
 $files | ForEach-Object { Move-Item "$path/$_" "$path.$((++$i % $load) + 1)" }
