@@ -19,5 +19,5 @@ $files = Get-ChildItem -Path $path -File
 ```{ps1}
 1..$splitCount | ForEach-Object { New-Item -ItemType Directory -Path "$path.$_" }
 $i = 0
-$files | ForEach-Object { Move-Item "$path/$_" "$path.$((++$i % $load) + 1)" }
+$files | ForEach-Object { Move-Item "$path/$_" "$path.$((++$i % $splitCount) + 1)" }
 ```
