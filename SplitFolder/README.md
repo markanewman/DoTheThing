@@ -5,18 +5,19 @@ This splits a single folder into several versions of the folder with the files b
 
 ## Steps
 
-1. Check the file count as a sanity check
-
-```{ps1}
-(Get-ChildItem -Recurse -File | Measure-Object).Count
-```
-2. Redistribute the files
+1. Load in the `$path` and `$splitCount`
 ```{ps1}
 $path = 'd:/xxx/yyy'
-$load = 6
-
-1..$load | ForEach-Object { New-Item -ItemType Directory -Path "$path.$_" }
+$splitCount = 6
+```
+2. Check the file count as a sanity check
+```{ps1}
 $files = Get-ChildItem -Path $path -File
+($files | Measure-Object).Count
+```
+3. Redistribute the files
+```{ps1}
+1..$splitCount | ForEach-Object { New-Item -ItemType Directory -Path "$path.$_" }
 $i = 0
 $files | ForEach-Object { Move-Item "$path/$_" "$path.$((++$i % $load) + 1)" }
 ```
