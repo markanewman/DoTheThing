@@ -1,17 +1,25 @@
 {
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": { "config": { "type": "secureObject" } },
+    "parameters": {
+        "vmName":  { "type": "string" },
+        "userName" :  { "type": "string" },
+        "password" :  { "type": "string" },
+        "myIp" :  { "type": "string" }
+    },
     "variables": {
-		"dataDiskName": "[concat(parameters('config').vmName, 'datadisk')]",
-		"networkInterfaceName" : "[concat(parameters('config').vmName, 'nic')]",
-        "networkSecurityGroupId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",		
-		"networkSecurityGroupName": "[concat(parameters('config').vmName, 'nsg')]",
-		"osDiskName": "[concat(parameters('config').vmName, 'osdisk')]",
-		"publicIpAddressName" : "[concat(parameters('config').vmName, 'ip')]",
+        "vmName": "[parameters('vmName')]",
+        "userName": "[parameters('userName')]",
+        "password": "[parameters('password')]",
+        "myIp": "[parameters('myIp')]",
+		"networkInterfaceName" : "[concat(variables('vmName'), '-nic')]",
+        "networkSecurityGroupId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
+		"networkSecurityGroupName": "[concat(variables('vmName'), '-nsg')]",
+        "osDiskName": "[concat(variables('vmName'), '-osdisk')]",
+        "publicIpAddressName" : "[concat(variables('vmName'), '-ip')]",
 		"virtualMachineSize": "Standard_E4_v3",
         "virtualNetworkId": "[resourceId(resourceGroup().name,'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
-		"virtualNetworkName": "[concat(parameters('config').vmName, 'vnet')]",
+		"virtualNetworkName": "[concat(variables('vmName'), '-vnet')]",
         "subnetRef": "[concat(variables('virtualNetworkId'), '/subnets/default')]"
     },
     "resources": [
@@ -43,7 +51,24 @@
             "name": "[variables('networkSecurityGroupName')]",
             "type": "Microsoft.Network/networkSecurityGroups",
             "apiVersion": "2019-02-01",
-            "location": "[resourceGroup().location]"
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "RDP",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "[variables('myIp')]",
+                            "destinationAddressPrefix": "*",
+                            "access": "Allow",
+                            "priority": 100,
+                            "direction": "Inbound"
+                        }
+                    }
+                ]
+            }
         },
         {
             "name": "[variables('virtualNetworkName')]",
@@ -67,14 +92,14 @@
 				"publicIpAllocationMethod": "Dynamic",
 				"idleTimeoutInMinutes": 5,
                 "dnsSettings": {
-                    "domainNameLabel": "[parameters('config').vmName]",
-                    "fqdn": "[concat(parameters('config').vmName, '.', resourceGroup().location, '.cloudapp.azure.com')]"
+                    "domainNameLabel": "[variables('vmName')]",
+                    "fqdn": "[concat(variables('vmName'), '.', resourceGroup().location, '.cloudapp.azure.com')]"
                 }
 			},
             "sku": { "name": "Basic" }
         },
         {
-            "name": "[parameters('config').vmName]",
+            "name": "[variables('vmName')]",
             "type": "Microsoft.Compute/virtualMachines",
             "apiVersion": "2019-03-01",
             "location": "[resourceGroup().location]",
@@ -96,9 +121,9 @@
                 },
                 "networkProfile": { "networkInterfaces": [ { "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]" } ] },
                 "osProfile": {
-                    "computerName": "[parameters('config').vmName]",
-                    "adminUsername": "[parameters('config').userName]",
-                    "adminPassword": "[parameters('config').password]",
+                    "computerName": "[variables('vmName')]",
+                    "adminUsername": "[variables('userName')]",
+                    "adminPassword": "[variables('password')]",
                     "windowsConfiguration": {
                         "enableAutomaticUpdates": true,
                         "provisionVmAgent": true
@@ -106,18 +131,6 @@
                 },
                 "licenseType": "Windows_Client"
             }
-        },
-		{
-            "name": "[variables('dataDiskName')]",
-            "type": "Microsoft.Storage/storageAccounts",
-            "apiVersion": "2019-04-01",
-            "location": "[resourceGroup().location]",
-            "properties": {
-                "accessTier": "Hot",
-                "supportsHttpsTrafficOnly": true
-            },
-            "sku": { "name": "Standard_LRS" },
-            "kind": "StorageV2"
         }
 	]
 }
