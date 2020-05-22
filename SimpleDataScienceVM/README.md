@@ -35,7 +35,7 @@ Walkthrough to understand how to get a VM setup fast
 4. [Update Windows](#update-windows)
    1. Click the Windows button, then type "update", then click "Check for Updates"
    2. Click "Check for Updates" even if it reports "No updates available".
-      Keep re-checking and re-starting windows untill this comes up "You'er up to date" AND there is a last checked date.
+      Keep re-checking and re-starting windows until this comes up "You'er up to date" AND there is a last checked date AND you click the button one last time.
       A lot of patched cannot be installed until another patch was installed 1st.
 
 ## Cleanup
