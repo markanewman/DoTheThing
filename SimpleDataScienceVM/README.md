@@ -32,8 +32,16 @@ Walkthrough to understand how to get a VM setup fast
    2. Click "Overview", then "Connect", then "RDP", then "Download file"
    3. Double click on the downloaded file, then click "Connect"
    4. Enter your username/password and click "Ok". If it is prompting you for your _work or school_ credentails, select "More Choices", then "Use a different account"
+4. [Update Windows](#update-windows)
+   1. Click the Windows button, then type "update", then click "Check for Updates"
+   2. Click "Check for Updates" even if it reports "No updates available".
+      Keep re-checking and re-starting windows untill this comes up "You'er up to date" AND there is a last checked date.
+      A lot of patched cannot be installed until another patch was installed 1st.
 
+## Cleanup
 
+AutoShutdown is turned off to prevent long running simulations from closing without knoledge.
+Make sure you delete your resources after you are done to avoid excess charge.
 
 ## Images
 
@@ -65,6 +73,12 @@ RDP
 ![Screenshot](rdp-2.jpg?raw=true)
 ![Screenshot](rdp-3.jpg?raw=true)
 
+<a name="update-windows" />
+Update Windows
+
+![Screenshot](update-windows-1.jpg?raw=true)
+![Screenshot](update-windows-2.jpg?raw=true)
+![Screenshot](update-windows-3.jpg?raw=true)
 
 
 
