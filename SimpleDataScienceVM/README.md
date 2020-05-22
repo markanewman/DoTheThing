@@ -26,7 +26,8 @@ Walkthrough to understand how to get a VM setup fast
       * VM name must be 5-10 lowercase alphanumeric and start with a letter
       * Don't do something stupid with your username/password
       * Your "My Ip" Can be found [here](https://whatismyipaddress.com/)
-   7. Watch the progress or just wait for the toast in the upper right hand corner
+   7. Read the "Terms and Conditions", check "I agree to the terms...", then click "Purchase"
+   8. Watch the progress or just wait for the toast in the upper right hand corner
 3. [RDP](#rdp) into new VM
    1. Select the VM inside the resource group
    2. Click "Overview", then "Connect", then "RDP", then "Download file"
