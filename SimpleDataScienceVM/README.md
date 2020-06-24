@@ -52,7 +52,6 @@ Walkthrough to understand how to get a VM setup fast
    choco install r.project -y
    choco install r.studio -y
    choco install rtools -y
-   choco install pandoc -y
    ```
 ## Cleanup
 
