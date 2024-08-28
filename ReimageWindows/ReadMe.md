@@ -1,23 +1,51 @@
 # Reimage Windows
 
-1. Download the Windows 11 [media creation tool](https://www.microsoft.com/software-download/windows11)
-2. Make sure to have the latest drivers on hand.
-   Extract the drivers to the hard drive.
-   The raw `.inf` files must be present fot this to work.
-   * [NUC](https://www.asus.com/us/supportonly/nuc13anbi7/helpdesk_download/)
-3. Make sure to have the product key on hand [1].
-   * Add "ShowKeyPlus" from the Windows Store
-   * Run "ShowKeyPlus"
-   * Copy out the "ProductID"
-5. 
-6. Make the bootable USB using the media creation tool.
-7. Copy the install.wim (`d:/sources/install.wmi`) from the USB to the hard drive (`c:/working/wim/install.wim`).
+I want a nice fresh copy of Windows every now and then.
+Think of it like spring cleaning.
+
+01. Get a 8GB or more USB FlashDrive and give it a quick format.
+    Make sure to lable the volume.
+02. Download the Windows 11 [media creation tool](https://www.microsoft.com/software-download/windows11)
+03. Make the bootable USB using the media creation tool.
+    This takes a while so start it now.
+04. Download the latest drivers and extract the drivers to the hard drive (`c:/working/drivers`).
+    The raw `.inf` files must be present for this to work.
+    * [NUC](https://www.asus.com/us/supportonly/nuc13anbi7/helpdesk_download/)
+6. Download and run "ShowKeyPlus" from the Windows Store [1].
+7. Copy out the "ProductID".
+8. Get the WiFi configuration.
+    ```
+    netsh.exe wlan export profile key=clear 
+    ```
+9. Create and download an `autounattend.xml` file [2].
+    * **DO NOT** copy in the ProductID.
+    * **DO NOT** copy in the WiFi password, use the "Configure Wi-Fi using an XML..." option.
+    * **DO NOT** copy in the XML, use `<WLANProfile></WLANProfile>` as a place holder.
+10. Wait for the media creation tool to complete.
+11. Copy `autounattend.xml` to the root of the USB FlashDrive.
+12. Add in the "ProductID" from step 6 and the XML from step 7 to the `autounattend.xml` file on the USB FlashDrive.
+13. Copy the `install.wim` file from the USB FlashDrive (`~/sources/install.wmi`) to the hard drive (`c:/working/wim/install.wim`).
+14. Select the index for the version that matches the "ProductID" [3].
+    ```{ps1}
+    Get-WindowsImage -ImagePath c:\working\wim\install.wim
+    ```
+15. Mount, update, and recreate the `install.wim` file [3].
+    ```{ps1}
+    mkdir c:\working\mount
+    Mount-WindowsImage -Path c:\working\mount\ -ImagePath c:\working\wim\install.wim -Index 1
+    Add-WindowsDriver -Path c:\working\mount\ -Driver c:\working\drivers -Recurse
+    Dismount-WindowsImage -Path c:\working\mount\ –Save
+    ```
+16. Copy the `install.wim` file from the hard drive (`c:/working/wim/install.wim`) to the USB FlashDrive (`~/sources/install.wmi`).
 
 
 ## References
 
-1. ["How to find your windows 11 product key"][1]
-2. xxx
-3. eee
+1. [How to find your windows 11 product key][1]
+2. [Generate autounattend.xml files for Windows 10/11][2]
+3. [How to Add/Remove Drivers to a Windows WIM/ISO Install Image][3]
+
 
 [1]: https://web.archive.org/web/20240524002428/https://www.howtogeek.com/784986/how-to-find-your-windows-11-product-key/ "ShowKeyPlus"
+[2]: https://schneegans.de/windows/unattend-generator/
+[3]: https://woshub.com/integrate-drivers-to-windows-install-media/
