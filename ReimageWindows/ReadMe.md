@@ -10,15 +10,14 @@ Think of it like spring cleaning.
    This takes a while so start it now.
 4. Download the latest drivers and extract the drivers to the hard drive (`c:/working/drivers`).
    The raw `.inf` files must be present for this to work.
-   * [NUC](https://www.asus.com/us/supportonly/nuc13anbi7/helpdesk_download/)
-6. Download and run "ShowKeyPlus" from the Windows Store [1].
+6. Download and run "ShowKeyPlus" from the Windows Store [1][ref_1].
 7. Copy out the "ProductID".
 8. Get the WiFi configuration.
    ```
    netsh.exe wlan export profile key=clear 
    ```
-9. Create a `choco_install.ps1` file with all the apps you want reinstalled.
-10. reate and download an `autounattend.xml` file [2].
+9. Create a `choco_install.ps1` file with all the apps you want reinstalled or use the [cached file][file_1].
+11. Create and download an `autounattend.xml` file [2][ref_2] or use the [cachedfile][file_2].
     * **DO NOT** copy in the ProductID.
     * **DO NOT** copy in the WiFi password, use the "Configure Wi-Fi using an XML..." option.
     * **DO NOT** copy in the XML, use `<WLANProfile></WLANProfile>` as a place holder.
@@ -26,31 +25,41 @@ Think of it like spring cleaning.
       ```
       . d:/choco_install.ps1
       ```
-11. Wait for the media creation tool to complete.
-12. Copy `autounattend.xml` and `choco_install.ps1` to the root of the USB FlashDrive.
-13. Add in the "ProductID" from step 6 and the XML from step 7 to the `autounattend.xml` file on the USB FlashDrive.
-14. Copy the `install.wim` file from the USB FlashDrive (`~/sources/install.wmi`) to the hard drive (`c:/working/wim/install.wim`).
-15. Select the index for the version that matches the "ProductID" [3].
+12. Wait for the media creation tool to complete.
+13. Copy `autounattend.xml` and `choco_install.ps1` to the root of the USB FlashDrive.
+14. Add in the "ProductID" from step 6 and the XML from step 7 to the `autounattend.xml` file on the USB FlashDrive.
+15. Copy the `install.wim` file from the USB FlashDrive (`~/sources/install.wmi`) to the hard drive (`c:/working/wim/install.wim`).
+16. Select the index for the version that matches the "ProductID" [3][ref_3].
     ```{ps1}
     Get-WindowsImage -ImagePath c:\working\wim\install.wim
     ```
-16. Mount, update, and recreate the `install.wim` file [3].
+17. Mount, update, and recreate the `install.wim` file [3][ref_3].
     ```{ps1}
     mkdir c:\working\mount
     Mount-WindowsImage -Path c:\working\mount\ -ImagePath c:\working\wim\install.wim -Index 1
     Add-WindowsDriver -Path c:\working\mount\ -Driver c:\working\drivers -Recurse
     Dismount-WindowsImage -Path c:\working\mount\ –Save
     ```
-17. Copy the `install.wim` file from the hard drive (`c:/working/wim/install.wim`) to the USB FlashDrive (`~/sources/install.wmi`).
+18. Copy the `install.wim` file from the hard drive (`c:/working/wim/install.wim`) to the USB FlashDrive (`~/sources/install.wmi`).
 
+## Driver Links
+
+* [NUC](https://www.asus.com/us/supportonly/nuc13anbi7/helpdesk_download/)
+
+## Cached files
+
+* [choco_install.ps1][file_1]
+* [autounattend.xml][file_2]
 
 ## References
 
-1. [How to find your windows 11 product key][1]
-2. [Generate autounattend.xml files for Windows 10/11][2]
-3. [How to Add/Remove Drivers to a Windows WIM/ISO Install Image][3]
+1. [How to find your windows 11 product key][ref_1]
+2. [Generate autounattend.xml files for Windows 10/11][ref_2]
+3. [How to Add/Remove Drivers to a Windows WIM/ISO Install Image][ref_3]
 
 
-[1]: https://web.archive.org/web/20240524002428/https://www.howtogeek.com/784986/how-to-find-your-windows-11-product-key/ "ShowKeyPlus"
-[2]: https://schneegans.de/windows/unattend-generator/
-[3]: https://woshub.com/integrate-drivers-to-windows-install-media/
+[file_1]: ./choco_install.ps1
+[file_2]: ./autounattend.xml
+[ref_1]: https://web.archive.org/web/20240524002428/https://www.howtogeek.com/784986/how-to-find-your-windows-11-product-key/ "ShowKeyPlus"
+[ref_2]: https://schneegans.de/windows/unattend-generator/
+[ref_3]: https://woshub.com/integrate-drivers-to-windows-install-media/
