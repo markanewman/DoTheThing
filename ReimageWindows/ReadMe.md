@@ -31,19 +31,18 @@ Think of it like spring cleaning.
     Search for the below as a quick replace.
     * `<Key>`
     * `<WLANProfile xmlns`
-16. Copy the `install.wim` file from the USB FlashDrive (`~/sources/install.wmi`) to the hard drive (`c:/working/wim/install.wim`).
-17. Select the index for the version that matches the "ProductID" [3][ref_3].
-    ```{ps1}
-    Get-WindowsImage -ImagePath c:\working\wim\install.wim
-    ```
-18. Mount, update, and recreate the `install.wim` file [3][ref_3].
+16. Copy the `boot.wim` file from the USB FlashDrive (`~/sources/boot.wmi`) to the hard drive (`c:/working/wim/boot.wim`).
+18. In an Admin Powershell, mount, update, and recreate the `boot.wim` file [3][ref_3].
     ```{ps1}
     mkdir c:\working\mount
-    Mount-WindowsImage -Path c:\working\mount\ -ImagePath c:\working\wim\install.wim -Index 1
+    Mount-WindowsImage -Path c:\working\mount\ -ImagePath c:\working\wim\boot.wim -Index 1
+    Add-WindowsDriver -Path c:\working\mount\ -Driver c:\working\drivers -Recurse
+    Dismount-WindowsImage -Path c:\working\mount\ –Save
+    Mount-WindowsImage -Path c:\working\mount\ -ImagePath c:\working\wim\boot.wim -Index 2
     Add-WindowsDriver -Path c:\working\mount\ -Driver c:\working\drivers -Recurse
     Dismount-WindowsImage -Path c:\working\mount\ –Save
     ```
-19. Copy the `install.wim` file from the hard drive (`c:/working/wim/install.wim`) to the USB FlashDrive (`~/sources/install.wmi`).
+19. Copy the `boot.wim` file from the hard drive (`c:/working/wim/boot.wim`) to the USB FlashDrive (`~/sources/boot.wmi`).
 
 ## Driver Links
 
