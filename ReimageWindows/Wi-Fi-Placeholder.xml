@@ -1,0 +1,11 @@
+<WLANProfile xmlns="http://www.microsoft.com/networking/WLAN/profile/v1">
+	<name>xxx</name>
+	<SSIDConfig>
+		<SSID>
+			<hex>00</hex>
+			<name>xxx</name>
+		</SSID>
+	</SSIDConfig>
+	<connectionType>ESS</connectionType>
+	<connectionMode>auto</connectionMode>
+</WLANProfile>
