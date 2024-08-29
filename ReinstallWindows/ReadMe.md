@@ -75,4 +75,12 @@ Think of it like spring cleaning.
 * [ ] Change password
 * [ ] Start > Settings > Accounts > Microsoft account > Sign in + restart
 * [ ] Start > Settings > Windows Update > Check for updates + restart
-* [ ] Install Chocolatey
+* [ ] Install Chocolatey + Apps
+      ```{shell}
+      choco install "7zip;adobereader;git;notepadplusplus;tailscale;vscode" -y
+      ```
+* [ ] Install apps that don't work wekk with Chocolatey
+      * Firefox
+      * MS Teams
+      * Office 365
+      * Steam
