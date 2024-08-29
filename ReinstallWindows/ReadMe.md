@@ -1,11 +1,10 @@
-# Reimage Windows
+# Reinstall Windows
 
 I want a nice fresh copy of Windows every now and then.
 Think of it like spring cleaning.
 
 1. Get a 8GB or more USB FlashDrive and give it a quick format.
-   Make sure to lable the volume.
-2. Download the [Rufus](https://rufus.ie) and "ShowKeyPlus" [1][ref_1] from the Windows store.
+2. Install [Rufus](https://rufus.ie) and "ShowKeyPlus" [1][ref_1] from the Windows store.
 3. Download the [Windows 11 ISO](https://www.microsoft.com/software-download/windows11) directly from Microsoft.
 4. Download the latest drivers and extract the drivers to the hard drive (`c:/working/drivers`).
    The raw `.inf` files must be present for this to work.
@@ -14,9 +13,13 @@ Think of it like spring cleaning.
    ```
 6. Run ShowKeyPlus and record the "Installed Key".
 7. Run Rufus to create a bootable Windows 11 recovery drive.
+   * V4.5.2180: all default options
+   * Click Start, deselect all options, click OK
 8. Create and download an `autounattend.xml` file [2][ref_2] or use the [cached file][file_1].
    * **DO NOT** copy in the Installed Key.
      It gets added in later.
+   * If the cached version is used, the user/pass is mark/password123.
+     It **MUST** be changed before anything is done after first boot.
 9. Wait for Rufus to complete.
 10. Copy `autounattend.xml` to the root of the USB FlashDrive.
 11. Add in the "Installed Key" from step 5 to the `autounattend.xml` file on the USB FlashDrive.
@@ -27,7 +30,7 @@ Think of it like spring cleaning.
     mkdir c:\working\wim
     copy d:/sources/install.wim c:/working/wim/install.wim
     ```
-13. In an Admin Powershell, find the index of the version of windows that corsponds to the Installed Key's SKU.
+13. In an Admin Powershell, find the index of the version of windows that corresponds to the Installed Key's SKU.
     ```{ps1}
     Get-WindowsImage -ImagePath C:\working\wim\install.wim
     ```
