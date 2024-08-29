@@ -69,3 +69,10 @@ Think of it like spring cleaning.
 [ref_1]: https://web.archive.org/web/20240524002428/https://www.howtogeek.com/784986/how-to-find-your-windows-11-product-key/ "ShowKeyPlus"
 [ref_2]: https://schneegans.de/windows/unattend-generator/
 [ref_3]: https://woshub.com/integrate-drivers-to-windows-install-media/
+
+# Post Install Checklist
+
+* [ ] Change password
+* [ ] Start > Settings > Accounts > Microsoft account > Sign in + restart
+* [ ] Start > Settings > Windows Update > Check for updates + restart
+* [ ] Install Chocolatey
