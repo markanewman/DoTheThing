@@ -32,10 +32,10 @@ Think of it like spring cleaning.
 11. Add in the "Installed Key" from step 5 to the `autounattend.xml` file on the USB FlashDrive.
     Search for `<Key>` quick replace.
     It should be close to the top of the file. 
-12. Copy the `install.wim` file from the USB FlashDrive (`~/sources/install.wmi`) to the hard drive (`c:/working/wim/install.wim`).
+12. Copy the `install.wim` file from the USB FlashDrive (`~/sources/install.wim`) to the hard drive (`c:/working/wim/install.wim`).
     ```{ps1}
     mkdir c:\working\wim
-    copy d:/sources/install.wmi c:/working/wim/install.wim
+    copy d:/sources/install.wim c:/working/wim/install.wim
     ```
 13. In an Admin Powershell, find the index of the version of windows that corsponds to the Installed Key's SKU.
     ```{ps1}
@@ -49,10 +49,10 @@ Think of it like spring cleaning.
     Dismount-WindowsImage -Path c:\working\mount\ –Save
     rmdir c:\working\mount
     ```
-15. Copy the `boot.wim` file from the hard drive (`c:/working/wim/boot.wim`) to the USB FlashDrive (`~/sources/boot.wmi`).
+15. Copy the `boot.wim` file from the hard drive (`c:/working/wim/boot.wim`) to the USB FlashDrive (`~/sources/boot.wim`).
     ```
-    del d:/sources/install.wmi
-    copy c:/working/wim/install.wim d:/sources/install.wmi
+    del d:/sources/install.wim
+    copy c:/working/wim/install.wim d:/sources/install.wim
     ```
 16. Restart the computer in recovery mode to allow USB boot.
     Start > System > Recovery > Advanced Startup > Restart Now
