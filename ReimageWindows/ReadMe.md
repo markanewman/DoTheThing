@@ -55,7 +55,7 @@ Think of it like spring cleaning.
     copy c:/working/wim/install.wim d:/sources/install.wim
     ```
 16. Restart the computer in recovery mode to allow USB boot.
-    Start > System > Recovery > Advanced Startup > Restart Now
+    Start > Settings > System > Recovery > Advanced Startup > Restart Now
 
 ## Driver Links
 
