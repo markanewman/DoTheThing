@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-US&Keyboard=00000409&GeoLocation=244&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=MarksDesktop&TimeZoneMode=Explicit&TimeZone=Eastern+Standard+Time&PartitionMode=Unattended&PartitionLayout=GPT&EspSize=300&RecoveryMode=Partition&RecoverySize=1024&WindowsEditionMode=Interactive&UserAccountMode=Interactive&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=HiddenSystem&ShowFileExtensions=true&DisableWidgets=true&ClassicContextMenu=true&DeleteTaskbarIcons=true&HideEdgeFre=true&EnableRemoteDesktop=true&HardenSystemDriveAcl=true&DisableLastAccess=true&NoAutoRebootWithLoggedOnUsers=true&DisableAppSuggestions=true&ProcessAudit=true&ProcessAuditCommandLine=true&WifiMode=Interactive&ExpressSettings=DisableAll&Remove3DViewer=true&RemoveBingSearch=true&RemoveCamera=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGetHelp=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveNotepadClassic=true&RemoveNotepad=true&RemoveOneNote=true&RemoveOpenSSHClient=true&RemoveOutlook=true&RemovePaint=true&RemovePaint3D=true&RemovePeople=true&RemovePhotos=true&RemovePowerAutomate=true&RemovePowerShellISE=true&RemoveQuickAssist=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveGetStarted=true&RemoveToDo=true&RemoveVoiceRecorder=true&RemoveWeather=true&RemoveWindowsMediaPlayer=true&RemoveZuneMusic=true&RemoveWindowsTerminal=true&RemoveWordPad=true&RemoveXboxApps=true&RemoveYourPhone=true&FirstLogonScript0=+++++if%28%27Unrestricted%27+-ne+%28Get-ExecutionPolicy%29%29+%7B+Set-ExecutionPolicy+Bypass+-Scope+Process+-Force+%7D%0D%0A+++++iex+%28%28New-Object+System.Net.WebClient%29.DownloadString%28%27https%3A%2F%2Fchocolatey.org%2Finstall.ps1%27%29%29%0D%0A+++++refreshenv%0D%0A%0D%0A+++++choco+install+%227zip%3Badobereader%3Bnotepadplusplus%3Btailscale%3Bpaint.net%22+-y%0D%0A+++++choco+install+%22git%3Bvscode%3Bdocker-desktop%22+-y%0D%0A+++++choco+install+%22aescrypt%3Bfilezilla%3Bvlc%22+-y&FirstLogonScriptType0=Ps1&WdacMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-US&Keyboard=00000409&GeoLocation=244&ProcessorArchitecture=amd64&ComputerNameMode=Custom&ComputerName=MarksDesktop&TimeZoneMode=Explicit&TimeZone=Eastern+Standard+Time&PartitionMode=Unattended&PartitionLayout=GPT&EspSize=300&RecoveryMode=Partition&RecoverySize=1024&WindowsEditionMode=Interactive&UserAccountMode=Interactive&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=HiddenSystem&ShowFileExtensions=true&DisableWidgets=true&ClassicContextMenu=true&DeleteTaskbarIcons=true&HideEdgeFre=true&EnableRemoteDesktop=true&HardenSystemDriveAcl=true&DisableLastAccess=true&NoAutoRebootWithLoggedOnUsers=true&DisableAppSuggestions=true&ProcessAudit=true&ProcessAuditCommandLine=true&WifiMode=Interactive&ExpressSettings=DisableAll&Remove3DViewer=true&RemoveBingSearch=true&RemoveCamera=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGetHelp=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveNotepadClassic=true&RemoveNotepad=true&RemoveOneNote=true&RemoveOpenSSHClient=true&RemoveOutlook=true&RemovePaint=true&RemovePaint3D=true&RemovePeople=true&RemovePhotos=true&RemovePowerAutomate=true&RemovePowerShellISE=true&RemoveQuickAssist=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveGetStarted=true&RemoveToDo=true&RemoveVoiceRecorder=true&RemoveWeather=true&RemoveWindowsMediaPlayer=true&RemoveZuneMusic=true&RemoveWindowsTerminal=true&RemoveWordPad=true&RemoveXboxApps=true&RemoveYourPhone=true&WdacMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -329,12 +329,6 @@
 				<HideEULAPage>true</HideEULAPage>
 				<HideWirelessSetupInOOBE>false</HideWirelessSetupInOOBE>
 			</OOBE>
-			<FirstLogonCommands>
-				<SynchronousCommand wcm:action="add">
-					<Order>1</Order>
-					<CommandLine>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-01.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-01.log" 2&gt;&amp;1"</CommandLine>
-				</SynchronousCommand>
-			</FirstLogonCommands>
 		</component>
 	</settings>
 	<Extensions xmlns="https://schneegans.de/windows/unattend-generator/">
@@ -505,15 +499,6 @@ $command = 'powershell.exe -NoProfile -Command "{0}"' -f { Remove-ItemProperty '
 Set-ItemProperty -LiteralPath 'Registry::HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\RunOnce' -Name 'DeleteTaskbarIcons' -Type 'String' -Value $command -Force;
 
 reg.exe unload 'HKU\DefaultUser';
-		</File>
-		<File path="C:\Windows\Setup\Scripts\unattend-01.ps1">
-if('Unrestricted' -ne (Get-ExecutionPolicy)) { Set-ExecutionPolicy Bypass -Scope Process -Force }
-     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-     refreshenv
-
-     choco install "7zip;adobereader;notepadplusplus;tailscale;paint.net" -y
-     choco install "git;vscode;docker-desktop" -y
-     choco install "aescrypt;filezilla;vlc" -y
 		</File>
 	</Extensions>
 </unattend>
