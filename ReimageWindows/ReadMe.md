@@ -12,10 +12,10 @@ Think of it like spring cleaning.
    ```{ps1}
    mkdir c:/working/drivers
    ```
-6. Run ShowKeyPlus and record the "ProductID".
+6. Run ShowKeyPlus and record the "Installed Key".
 7. Run Rufus to create a bootable Windows 11 recovery drive.
 8. Create and download an `autounattend.xml` file [2][ref_2] or use the [cached file][file_1].
-   * **DO NOT** copy in the ProductID.
+   * **DO NOT** copy in the Installed Key.
      It gets added in later.
    * In the "Scripts to run when the first user logs on after Windows has been installed" section, in the _first_ section, add the following as a `.ps1`.
      ```
@@ -29,7 +29,7 @@ Think of it like spring cleaning.
      ```
 9. Wait for Rufus to complete.
 10. Copy `autounattend.xml` to the root of the USB FlashDrive.
-11. Add in the "ProductID" from step 5 to the `autounattend.xml` file on the USB FlashDrive.
+11. Add in the "Installed Key" from step 5 to the `autounattend.xml` file on the USB FlashDrive.
     Search for `<Key>` quick replace.
     It should be close to the top of the file. 
 12. Copy the `install.wim` file from the USB FlashDrive (`~/sources/install.wmi`) to the hard drive (`c:/working/wim/install.wim`).
@@ -37,7 +37,7 @@ Think of it like spring cleaning.
     mkdir c:\working\wim
     copy d:/sources/install.wmi c:/working/wim/install.wim
     ```
-13. In an Admin Powershell, find the index of the version of windows that corsponds to the ProductID SKU.
+13. In an Admin Powershell, find the index of the version of windows that corsponds to the Installed Key's SKU.
     ```{ps1}
     Get-WindowsImage -ImagePath C:\working\wim\install.wim
     ```
