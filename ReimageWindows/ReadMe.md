@@ -22,12 +22,10 @@ Think of it like spring cleaning.
      if('Unrestricted' -ne (Get-ExecutionPolicy)) { Set-ExecutionPolicy Bypass -Scope Process -Force }
      iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
      refreshenv
-     ```
-   * In the "Scripts to run when the first user logs on after Windows has been installed" section, in the _second_ section, add the following as a `.ps1`.
-     ```
-     choco install "7zip;adobereader;notepadplusplus;tailscale" -y
+
+     choco install "7zip;adobereader;notepadplusplus;tailscale;paint.net" -y
      choco install "git;vscode;docker-desktop" -y
-     choco install "aescrypt;filezilla" -y
+     choco install "aescrypt;filezilla;vlc" -y
      ```
 9. Wait for Rufus to complete.
 10. Copy `autounattend.xml` to the root of the USB FlashDrive.
