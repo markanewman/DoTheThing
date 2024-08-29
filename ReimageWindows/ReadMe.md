@@ -17,16 +17,6 @@ Think of it like spring cleaning.
 8. Create and download an `autounattend.xml` file [2][ref_2] or use the [cached file][file_1].
    * **DO NOT** copy in the Installed Key.
      It gets added in later.
-   * In the "Scripts to run when the first user logs on after Windows has been installed" section, in the _first_ section, add the following as a `.ps1`.
-     ```
-     if('Unrestricted' -ne (Get-ExecutionPolicy)) { Set-ExecutionPolicy Bypass -Scope Process -Force }
-     iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-     refreshenv
-
-     choco install "7zip;adobereader;notepadplusplus;tailscale;paint.net" -y
-     choco install "git;vscode;docker-desktop" -y
-     choco install "aescrypt;filezilla;vlc" -y
-     ```
 9. Wait for Rufus to complete.
 10. Copy `autounattend.xml` to the root of the USB FlashDrive.
 11. Add in the "Installed Key" from step 5 to the `autounattend.xml` file on the USB FlashDrive.
